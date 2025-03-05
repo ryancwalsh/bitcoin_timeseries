@@ -59,7 +59,7 @@ function getSimpleDate(dateAsString: string): string {
 
 function summarizeDrawdown(drawdown: Drawdown): string {
   const yearsOrBlank = drawdown.duration > 30 ? ` (${daysToYears(drawdown.duration)} years)` : ``;
-  return `${getSimpleDate(drawdown.start.toISOString())} 🡺  ${getSimpleDate(drawdown.trough.date.toISOString())} 🡺  ${getSimpleDate(drawdown.end.toISOString())}. ${formatNumber(drawdown.duration)} days${yearsOrBlank}. ${formatCurrency(drawdown.highWaterMark)} 🡺  ${formatCurrency(drawdown.trough.price)}`;
+  return `${getSimpleDate(drawdown.start.toISOString())} 🡺 ${getSimpleDate(drawdown.trough.date.toISOString())} 🡺 ${getSimpleDate(drawdown.end.toISOString())}. ${formatNumber(drawdown.duration)} days${yearsOrBlank}. ${formatCurrency(drawdown.highWaterMark)} 🡺 ${formatCurrency(drawdown.trough.price)}`;
 }
 
 // eslint-disable-next-line max-lines-per-function
@@ -170,7 +170,7 @@ async function processData() {
     const rows = await readCSV(timeseriesFilePath);
     const drawdowns = getDrawdowns(rows);
     const longestDrawdown = findLongestDrawdown(drawdowns);
-    console.log(chalk.bold.greenBright(`Final longest drawdown:`, longestDrawdown && summarizeDrawdown(longestDrawdown)), longestDrawdown);
+    console.log(chalk.bold.greenBright(`Longest drawdown:`, longestDrawdown && summarizeDrawdown(longestDrawdown)), longestDrawdown);
   } catch (error) {
     console.error('Error reading CSV:', error);
   }
