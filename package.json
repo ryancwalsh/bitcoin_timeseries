@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "csv-parser": "^3.2.0",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@ryancwalsh/linting": "1.0.0",
+    "@types/yargs": "^17.0.33"
+  },
+  "name": "bitcoin_timeseries",
+  "repository": "git@github.com:ryancwalsh/bitcoin_timeseries.git",
+  "type": "module",
+  "version": "0.0.1"
+}
