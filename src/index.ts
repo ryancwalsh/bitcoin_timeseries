@@ -62,6 +62,23 @@ function summarizeDrawdown(drawdown: Drawdown): string {
   return `${getSimpleDate(drawdown.start.toISOString())} 🡺 ${getSimpleDate(drawdown.trough.date.toISOString())} 🡺 ${getSimpleDate(drawdown.end.toISOString())}. ${formatNumber(drawdown.duration)} days${yearsOrBlank}. ${formatCurrency(drawdown.highWaterMark)} 🡺 ${formatCurrency(drawdown.trough.price)}`;
 }
 
+/**
+ * Instantiate partialDrawdown with meaningless values.
+ * Only when partialDrawdown gets updated later with a non-zero duration will its values make sense.
+ */
+function instantiatePartialDrawdown(row: Row): Drawdown {
+  return {
+    duration: 0,
+    end: row.date,
+    highWaterMark: row.price,
+    start: row.date,
+    trough: {
+      date: row.date,
+      price: row.price,
+    },
+  };
+}
+
 // eslint-disable-next-line max-lines-per-function
 function getDrawdowns(rows: Row[]): Drawdown[] {
   if (rows.length === 0) {
@@ -91,17 +108,7 @@ function getDrawdowns(rows: Row[]): Drawdown[] {
           console.log(chalk.dim(`In drawdown:`, summarizeDrawdown(partialDrawdown)));
         }
       } else {
-        // Instantiating partialDrawdown with meaningless values. Only when partialDrawdown gets updated later with a non-zero duration will its values make sense.
-        partialDrawdown = {
-          duration: 0,
-          end: row.date,
-          highWaterMark: row.price,
-          start: row.date,
-          trough: {
-            date: row.date,
-            price: row.price,
-          },
-        };
+        partialDrawdown = instantiatePartialDrawdown(row);
       }
     } else {
       peakRow.price = row.price;
