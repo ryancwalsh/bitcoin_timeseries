@@ -68,17 +68,14 @@ function getDrawdowns(rows: Row[]): Drawdown[] {
     throw new Error('No rows found.');
   }
 
-  const sortedRows = rows.sort((a, b) => a.date.getTime() - b.date.getTime());
-
+  rows.sort((a, b) => a.date.getTime() - b.date.getTime());
+  const peakRow = rows[0];
   const drawdowns: Drawdown[] = [];
-
-  const peakRow = sortedRows[0];
-
   let partialDrawdown: Drawdown | null = null;
 
-  for (let index = 1; index < sortedRows.length; index += 1) {
-    const row = sortedRows[index];
-    if (row.price < peakRow.price && index !== sortedRows.length - 1) {
+  for (let index = 1; index < rows.length; index += 1) {
+    const row = rows[index];
+    if (row.price < peakRow.price && index !== rows.length - 1) {
       if (partialDrawdown) {
         const duration = (row.date.getTime() - partialDrawdown.start.getTime()) / (1_000 * 60 * 60 * 24);
         partialDrawdown.duration = duration;
