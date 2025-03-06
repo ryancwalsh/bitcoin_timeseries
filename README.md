@@ -110,3 +110,11 @@ Longest drawdown: 2013-12-05 🡺 2014-02-21 🡺 2017-03-01. 1,183 days (3.2 ye
   trough: { date: 2014-02-21T00:00:00.000Z, price: 111.6 }
 }
 ```
+
+## Double-checking the results
+
+To double-check the above results (which came from [this script](src/index.ts)), I answered the same question via a completely independent approach (using columns of formulas + a pivot table in this [spreadsheet](src/BTC-USD_historical_bitcoin_data.xlsx)). The results were the same. ✅
+
+## To Do
+
+Make infographic of deepest 10 drawdowns (showing each as rectangle where height is depth and width is duration, labels of date and prices inside), and compare to deepest of S&P 500.
