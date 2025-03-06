@@ -2,6 +2,8 @@
 
 Inspired by Michael Saylor's 2025-03-03 CNBC interview where [he said](https://youtu.be/On8QX5_IoY0?si=FstwuWWviGVWmf1o&t=276): “I don't think anybody’s ever lost money in the Bitcoin network holding four years.”
 
+[![screenshot of Michael Saylor's 2025-03-03 CNBC interview](YouTube_screenshot_On8QX5_IoY0.png)](https://youtu.be/On8QX5_IoY0?si=FstwuWWviGVWmf1o&t=276)
+
 I downloaded daily BTC-USD price data from https://www.investing.com/crypto/bitcoin/historical-data, which seemed to have an undocumented 5,000-row limit (so multiple exports were required) and did not offer data prior to 2010-07-18 (which may have been insignificant for our purposes here anyway).
 
 I first combined the CSV batches to one longer timeseries in [my Google Drive](https://docs.google.com/spreadsheets/d/1hgllgBl7-htTij1jq2m4qgitty4-z-B4Cx6dhuVaFs8/edit?gid=1957164531#gid=1957164531).
