@@ -31,8 +31,7 @@ type Row = {
 type Drawdown = {
   duration: number;
   end: Date;
-  highWaterMark: number;
-  start: Date;
+  peak: Row;
   trough: Row;
 };
 
@@ -59,7 +58,7 @@ function getSimpleDate(dateAsString: string): string {
 
 function summarizeDrawdown(drawdown: Drawdown): string {
   const yearsOrBlank = drawdown.duration > 30 ? ` (${daysToYears(drawdown.duration)} years)` : ``;
-  return `${getSimpleDate(drawdown.start.toISOString())} 🡺 ${getSimpleDate(drawdown.trough.date.toISOString())} 🡺 ${getSimpleDate(drawdown.end.toISOString())}. ${formatNumber(drawdown.duration)} days${yearsOrBlank}. ${formatCurrency(drawdown.highWaterMark)} 🡺 ${formatCurrency(drawdown.trough.price)}`;
+  return `${getSimpleDate(drawdown.peak.date.toISOString())} 🡺 ${getSimpleDate(drawdown.trough.date.toISOString())} 🡺 ${getSimpleDate(drawdown.end.toISOString())}. ${formatNumber(drawdown.duration)} days${yearsOrBlank}. ${formatCurrency(drawdown.peak.price)} 🡺 ${formatCurrency(drawdown.trough.price)}`;
 }
 
 /**
@@ -70,12 +69,8 @@ function instantiatePartialDrawdown(row: Row): Drawdown {
   return {
     duration: 0,
     end: row.date,
-    highWaterMark: row.price,
-    start: row.date,
-    trough: {
-      date: row.date,
-      price: row.price,
-    },
+    peak: row,
+    trough: row,
   };
 }
 
@@ -94,7 +89,7 @@ function getDrawdowns(rows: Row[]): Drawdown[] {
     const row = rows[index];
     if (row.price < peakRow.price && index !== rows.length - 1) {
       if (partialDrawdown) {
-        const duration = (row.date.getTime() - partialDrawdown.start.getTime()) / (1_000 * 60 * 60 * 24);
+        const duration = (row.date.getTime() - partialDrawdown.peak.date.getTime()) / (1_000 * 60 * 60 * 24);
         partialDrawdown.duration = duration;
         partialDrawdown.end = row.date;
         if (row.price < partialDrawdown.trough.price) {
