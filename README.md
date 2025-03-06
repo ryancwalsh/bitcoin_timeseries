@@ -1,4 +1,4 @@
-# Bitcoin Timeseries / BTC-USD Drawdowns
+# Bitcoin Drawdowns / BTC-USD Timeseries
 
 Inspired by Michael Saylor's 2025-03-03 CNBC interview where [he said](https://youtu.be/On8QX5_IoY0?si=FstwuWWviGVWmf1o&t=276): “I don't think anybody’s ever lost money in the Bitcoin network holding four years.”
 

@@ -45,13 +45,16 @@ function formatCurrency(value: number): string {
 }
 
 function formatNumber(value: number): string {
-  return value >= 1_000 ? new Intl.NumberFormat('en-US').format(value) : value.toString();
+  return new Intl.NumberFormat('en-US').format(value);
 }
 
 function daysToYears(days: number): string {
-  return (days / 365).toFixed(1); // Converts to years and rounds to 1 decimal place
+  return (days / 365).toFixed(1);
 }
 
+/**
+ * Returns first 10 characters of a string, which should be in YYYY-MM-DD format.
+ */
 function getSimpleDate(dateAsString: string): string {
   return dateAsString.slice(0, 10);
 }
