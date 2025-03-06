@@ -70,7 +70,7 @@ function summarizeDrawdown(drawdown: Drawdown): string {
  */
 function instantiatePartialDrawdown(row: Row): Drawdown {
   return {
-    duration: 0,
+    duration: 1,
     end: row.date,
     peak: row,
     trough: row,
@@ -92,7 +92,7 @@ function getDrawdowns(rows: Row[]): Drawdown[] {
     const row = rows[index];
     if (row.price < peakRow.price && index !== rows.length - 1) {
       if (partialDrawdown) {
-        const duration = (row.date.getTime() - partialDrawdown.peak.date.getTime()) / (1_000 * 60 * 60 * 24);
+        const duration = (row.date.getTime() - partialDrawdown.peak.date.getTime()) / (1_000 * 60 * 60 * 24) + 1;
         partialDrawdown.duration = duration;
         partialDrawdown.end = row.date;
         if (row.price < partialDrawdown.trough.price) {
@@ -112,11 +112,9 @@ function getDrawdowns(rows: Row[]): Drawdown[] {
       peakRow.price = row.price;
       peakRow.date = row.date;
       if (partialDrawdown) {
-        if (partialDrawdown.duration > 0) {
-          drawdowns.push(partialDrawdown);
-          // Now that the drawdown has finished, log it:
-          console.log(`Drawdown #${formatNumber(drawdowns.length)}:`, summarizeDrawdown(partialDrawdown), isVerbose ? partialDrawdown : '');
-        }
+        drawdowns.push(partialDrawdown);
+        // Now that the drawdown has finished, log it:
+        console.log(`Drawdown #${formatNumber(drawdowns.length)}:`, summarizeDrawdown(partialDrawdown), isVerbose ? partialDrawdown : '');
 
         partialDrawdown = null;
       }
