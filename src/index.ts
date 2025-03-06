@@ -168,9 +168,14 @@ async function readCSV(filePath: string): Promise<Row[]> {
 async function processData() {
   try {
     const rows = await readCSV(timeseriesFilePath);
+    console.log(chalk.bold.yellow(`Bitcoin drawdowns history`));
+    console.log(chalk.bold.yellow(`-------------------------`));
+    console.log(chalk.bold.blue(`(start date 🡺 trough date 🡺 end date. duration. start and end price 🡺 trough price)`));
     const drawdowns = getDrawdowns(rows);
     const longestDrawdown = findLongestDrawdown(drawdowns);
+    console.log(chalk.bold.greenBright(`-----------------`));
     console.log(chalk.bold.greenBright(`Longest drawdown:`, longestDrawdown && summarizeDrawdown(longestDrawdown)), longestDrawdown);
+    console.log(chalk.bold.greenBright(`-----------------`));
   } catch (error) {
     console.error('Error reading CSV:', error);
   }

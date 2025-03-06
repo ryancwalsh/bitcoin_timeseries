@@ -21,6 +21,9 @@ or
 ## Result (as of 2025-03-04):
 
 ```
+Bitcoin drawdowns history
+-------------------------
+(start date 🡺 trough date 🡺 end date. duration. start and end price 🡺 trough price)
 Drawdown #1: 2010-11-07 🡺 2010-11-08 🡺 2011-01-13. 68 days (0.2 years). $0.30 🡺 $0.20
 Drawdown #2: 2011-01-17 🡺 2011-01-17 🡺 2011-01-19. 3 days. $0.30 🡺 $0.30
 Drawdown #3: 2011-02-10 🡺 2011-02-10 🡺 2011-02-10. 1 days. $1.00 🡺 $1.00
@@ -103,17 +106,24 @@ Drawdown #79: 2024-12-12 🡺 2024-12-12 🡺 2024-12-12. 1 days. $100,009.90 �
 Drawdown #80: 2024-12-14 🡺 2024-12-14 🡺 2024-12-14. 1 days. $101,417.70 🡺 $101,417.70
 Drawdown #81: 2024-12-18 🡺 2025-01-09 🡺 2025-01-20. 34 days (0.1 years). $100,197.80 🡺 $92,539.80
 Drawdown #82: 2025-01-22 🡺 2025-02-26 🡺 2025-03-03. 41 days (0.1 years). $103,684.80 🡺 $84,212.70
+-----------------
 Longest drawdown: 2013-12-05 🡺 2014-02-21 🡺 2017-03-01. 1,183 days (3.2 years). $1,106.30 🡺 $111.60 {
   duration: 1183,
   end: 2017-03-01T00:00:00.000Z,
   peak: { date: 2013-12-05T00:00:00.000Z, price: 1106.3 },
   trough: { date: 2014-02-21T00:00:00.000Z, price: 111.6 }
 }
+-----------------
 ```
 
 ## Double-checking the results
 
 To double-check the above results (which came from [this script](src/index.ts)), I answered the same question via a completely independent approach (using columns of formulas + a pivot table in this [spreadsheet](src/BTC-USD_historical_bitcoin_data.xlsx)). The results were the same. ✅
+
+## Tweets
+
+- https://x.com/saylor/status/1896612741374468541
+- https://x.com/rwalsh06/status/1897476282142875700
 
 ## To Do
 
